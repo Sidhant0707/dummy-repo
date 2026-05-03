@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # This allows you to run it manually to test
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -16,11 +16,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Better for architectural analysis
+          fetch-depth: 0
 
       - name: Run CodeAutopsy Action
         uses: Sidhant0707/codeautopsy-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # This points to the dedicated webhook we just deployed to Vercel
-          api_endpoint: 'https://codeautopsy.app/api/github-action'
+          # Using your working Vercel deployment URL
+          api_endpoint: 'https://codeautopsy-lyart.vercel.app/api/github-action'
