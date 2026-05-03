@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch: # This allows you to run it manually to test
 
 permissions:
   contents: write
@@ -12,9 +13,14 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
-      - uses: Sidhant0707/codeautopsy-action@main
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Better for architectural analysis
+
+      - name: Run CodeAutopsy Action
+        uses: Sidhant0707/codeautopsy-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          # This points to the dedicated webhook we just deployed to Vercel
           api_endpoint: 'https://codeautopsy.app/api/github-action'
