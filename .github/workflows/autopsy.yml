@@ -17,3 +17,4 @@ jobs:
       - uses: Sidhant0707/codeautopsy-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          api_endpoint: 'https://codeautopsy.app/api/github-action'
