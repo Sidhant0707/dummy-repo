@@ -1,0 +1,19 @@
+name: CodeAutopsy Sync
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: Sidhant0707/codeautopsy-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
